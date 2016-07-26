@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="////  AppDelegate.swift//  CustomFont////  Created by Allen on 16/1/7.//  Copyright © 2016年 Allen. All rights reserved.//
+import UIKitimport CoreData
+">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="John Doe">
+    
+
+    <!-- Title -->
+    
+    <title>Objective-c | Hexo</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!-- Content -->
+    <section class="article-container">
+<!-- Back Home -->
+<a class="nav-back" href="/">
+    <i class="fa fa-puzzle-piece"></i>
+</a>
+
+<!-- Page Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Objective-c</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="post-content col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>//<br>//  AppDelegate.swift<br>//  CustomFont<br>//<br>//  Created by Allen on 16/1/7.<br>//  Copyright © 2016年 Allen. All rights reserved.<br>//</p>
+<p>import UIKit<br>import CoreData</p>
+<p>@UIApplicationMain<br>class AppDelegate: UIResponder, UIApplicationDelegate {</p>
+<pre><code>var window: UIWindow?
+
+
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool {
+    // Override point for customization after application launch.
+
+    return true
+}
+
+func applicationWillResignActive(application: UIApplication) {
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+func applicationDidEnterBackground(application: UIApplication) {
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+func applicationWillEnterForeground(application: UIApplication) {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+func applicationDidBecomeActive(application: UIApplication) {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+func applicationWillTerminate(application: UIApplication) {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Saves changes in the application&apos;s managed object context before the application terminates.
+    self.saveContext()
+}
+
+// MARK: - Core Data stack
+
+lazy var applicationDocumentsDirectory: NSURL = {
+    // The directory the application uses to store the Core Data store file. This code uses a directory named &quot;me.appkitchen.CustomFont&quot; in the application&apos;s documents Application Support directory.
+    let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+    return urls[urls.count-1]
+}()
+
+lazy var managedObjectModel: NSManagedObjectModel = {
+    // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
+    let modelURL = NSBundle.mainBundle().URLForResource(&quot;CustomFont&quot;, withExtension: &quot;momd&quot;)!
+    return NSManagedObjectModel(contentsOfURL: modelURL)!
+}()
+
+lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+    // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
+    // Create the coordinator and store
+    let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+    let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(&quot;SingleViewCoreData.sqlite&quot;)
+    var failureReason = &quot;There was an error creating or loading the application&apos;s saved data.&quot;
+    do {
+        try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+    } catch {
+        // Report any error we got.
+        var dict = [String: AnyObject]()
+        dict[NSLocalizedDescriptionKey] = &quot;Failed to initialize the application&apos;s saved data&quot;
+        dict[NSLocalizedFailureReasonErrorKey] = failureReason
+
+        dict[NSUnderlyingErrorKey] = error as NSError
+        let wrappedError = NSError(domain: &quot;YOUR_ERROR_DOMAIN&quot;, code: 9999, userInfo: dict)
+        // Replace this with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(&quot;Unresolved error \(wrappedError), \(wrappedError.userInfo)&quot;)
+        abort()
+    }
+
+    return coordinator
+}()
+
+lazy var managedObjectContext: NSManagedObjectContext = {
+    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
+    let coordinator = self.persistentStoreCoordinator
+    var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+    managedObjectContext.persistentStoreCoordinator = coordinator
+    return managedObjectContext
+}()
+
+// MARK: - Core Data Saving support
+
+func saveContext () {
+    if managedObjectContext.hasChanges {
+        do {
+            try managedObjectContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            NSLog(&quot;Unresolved error \(nserror), \(nserror.userInfo)&quot;)
+            abort()
+        }
+    }
+}
+</code></pre><p>}</p>
+
+ 
+                <!-- Meta -->
+                <div class="post-meta">
+                    <hr>
+                    <br>
+                    <div class="post-tags">
+                        
+                    </div>
+                    <div class="post-date">
+                        2016 年 07 月 26 日
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comments -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- Disqus Comments -->
+
+
+            </div>
+        </div>
+    </div>
+</article>
+</section>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	console.log('Hexo-theme-hollow designed by zchen9 🙋 © 2015-' + (new Date()).getFullYear());
+</script>
+
+
+</body>
+
+</html>
